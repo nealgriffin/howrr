@@ -21,7 +21,7 @@ class Actions {
 		}).then( function(response) { 
 			AppDispatcher.dispatch({
 				actionType: Constants.ADD_COMMENT,
-				comment: params
+				comment: response
 			});
 		}).catch( function(error) { 
 			console.error("Error!", error)

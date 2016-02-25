@@ -17,6 +17,7 @@ gem 'react-rails', '1.6.0'
 gem 'flux-rails-assets', '2.1.0'
 gem 'lodash-rails', '4.3.0'
 gem 'sprockets-es6', '0.6.1'
+gem 'ancestry', '2.1.0'
 
 
 # Use jquery as the JavaScript library
