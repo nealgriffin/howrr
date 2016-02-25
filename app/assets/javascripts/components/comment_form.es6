@@ -15,7 +15,7 @@ class CommentForm extends React.Component {
 
 	submitComment(event) {
 		event.preventDefault();
-		this.context.actions.addComment(this.state);
+		this.context.actions.addComment(_.merge(this.state, { parent_id: this.props.parent_id} ));
 		this.setState(this.defaultState);
 
 	}
@@ -32,6 +32,7 @@ class CommentForm extends React.Component {
 			<form>
 				<label>Author</label>
 				<input type="text" onChange={this.onFieldChange.bind(this)} name="author" value={this.state.author} />
+				<br />
 				<label>Comment</label>
 				<textarea name="body" value={this.state.body} onChange={this.onFieldChange.bind(this)} />
 				<button type="submit" onClick={this.submitComment.bind(this)} >Submit</button>
