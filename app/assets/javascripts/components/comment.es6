@@ -10,6 +10,12 @@ class Comment extends React.Component {
 			rank: React.PropTypes.number
 		}
 	}
+
+	static get contextTypes() {
+		return {
+			actions: React.PropTypes.func.isRequired
+		}
+	}
 	constructor() {
 		super()
 		this.state = { isReplying: false};
@@ -20,6 +26,9 @@ class Comment extends React.Component {
 	onCommentSubmitted(event) {
 		this.setState({isReplying: false});
 	}
+	onUpvote(event) {
+		this.context.actions.upvoteComment(this.props)
+	}
 
 	render() {
 		const replyText = this.state.isReplying ? 'Hide' : 'Reply';
@@ -29,6 +38,7 @@ class Comment extends React.Component {
 				<div>by: {this.props.author}</div>
 				<div>Rank: {this.props.rank}</div>
 				<button className="" onClick={this.onToggleReply.bind(this)}>{replyText}</button>
+				<button className="" onClick={this.onUpvote.bind(this)}>+1</button>
 				<CommentForm
 					parent_id={this.props.id}
 					isReplying={this.state.isReplying}

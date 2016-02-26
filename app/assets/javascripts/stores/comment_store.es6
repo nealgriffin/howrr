@@ -15,6 +15,10 @@ class CommentStore extends EventEmitter {
 					this.addComment(payload.comment)
 					this.emitChange()
 					break
+				case Constants.UPVOTE_COMMENT:
+					this.upvote(payload.comment)
+					this.emitChange()
+					break;
 				case Constants.SET_COMMENTS:
 				  this.setComments(payload.comments)
 				  this.emitChange()
@@ -38,6 +42,9 @@ class CommentStore extends EventEmitter {
 
 	comments(parentId) {
 		return this._comments.filter( c => { return c && c.parent_id == parentId} );
+	}
+	upvote(comment) {
+		this._comments[comment.id].rank++;
 	}
 
 	addChangeListener (callback) {

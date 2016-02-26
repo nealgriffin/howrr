@@ -53,5 +53,30 @@ class Api {
 		}.bind(this) );
 	}
 
+	static put_w_promise(route, params) {
+		return new Promise( function(resolve, reject) {
+			var req = new XMLHttpRequest();
+			req.open('PUT', route);
+			req.withCredentials = true;
+			req.setRequestHeader('Accept', 'application/json');
+			req.setRequestHeader('Content-Type', 'application/json');
+			req.setRequestHeader('X-CSRF-Token', this.token() );
+			req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+			req.onload = function() {
+				if (req.status == 200) {
+					resolve(req.response);
+				} else {
+					reject(Error(req.statusText));
+				}
+			};
+			req.onerror = function() {
+				reject(Error("Network Error"));
+			};
+			req.send();
+
+
+		}.bind(this) );
+	}
+
 }
 export default Api;
