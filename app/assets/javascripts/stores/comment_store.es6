@@ -7,7 +7,6 @@ class CommentStore extends EventEmitter {
 
 	constructor() {
 		super()
-		super.setMaxListeners(0);
 		this._comments = []
 		AppDispatcher.register((payload) => {
 			switch(payload.actionType) {

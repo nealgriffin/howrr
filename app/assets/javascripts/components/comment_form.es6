@@ -7,10 +7,8 @@ class CommentForm extends React.Component {
 	}
 	constructor() {
 		super();
-
 		this.defaultState = {body: '', author: ''}
 		this.state = this.defaultState;
-
 	}
 
 	submitComment(event) {
@@ -29,15 +27,17 @@ class CommentForm extends React.Component {
 
 	render() {
 		return (
-			<form>
-				<label>Author</label>
-				<input type="text" onChange={this.onFieldChange.bind(this)} name="author" value={this.state.author} />
-				<br />
-				<label>Comment</label>
-				<textarea name="body" value={this.state.body} onChange={this.onFieldChange.bind(this)} />
-				<button type="submit" onClick={this.submitComment.bind(this)} >Submit</button>
+			<div>
+				<form className= {this.props.isReplying ? '' : 'hide' } >
+					<label>Author</label>
+					<input type="text" onChange={this.onFieldChange.bind(this)} name="author" value={this.state.author} />
+					<br />
+					<label>Comment</label>
+					<textarea name="body" value={this.state.body} onChange={this.onFieldChange.bind(this)} />
+					<button type="submit" onClick={this.submitComment.bind(this)} >Submit</button>
 
-			</form>
+				</form>
+			</div>
 		)
 	}
 }
