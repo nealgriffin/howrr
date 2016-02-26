@@ -17,3 +17,9 @@
  .hide {
  	display: none;
  }
+ .comment {
+ 	list-style-type: none;
+ 	margin-left: 10px;
+ 	margin-top: 10px;
+ 	padding-left: 20px;
+ }

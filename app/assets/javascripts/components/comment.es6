@@ -17,16 +17,22 @@ class Comment extends React.Component {
 	onToggleReply() {
 		this.setState({isReplying: !this.state.isReplying});
 	}
+	onCommentSubmitted(event) {
+		this.setState({isReplying: false});
+	}
 
 	render() {
 		const replyText = this.state.isReplying ? 'Hide' : 'Reply';
 		return (
-			<li>
+			<li className="comment">
 				<p>{this.props.body}</p>
 				<div>by: {this.props.author}</div>
 				<div>Rank: {this.props.rank}</div>
 				<button className="" onClick={this.onToggleReply.bind(this)}>{replyText}</button>
-				<CommentForm parent_id={this.props.id} isReplying={this.state.isReplying} />
+				<CommentForm
+					parent_id={this.props.id}
+					isReplying={this.state.isReplying}
+					onCommentSubmitted={this.onCommentSubmitted.bind(this)} />
 				<CommentList parent_id={this.props.id} />
 			</li>
 		);

@@ -5,6 +5,14 @@ class CommentForm extends React.Component {
 		  actions: React.PropTypes.func.isRequired
 		}
 	}
+
+	static get PropTypes() {
+		return {
+			isReplying: React.PropType.bool,
+			onCommentSubmitted: React.PropTypes.func,
+			parent_id: React.PropTypes.number
+		}
+	}
 	constructor() {
 		super();
 		this.defaultState = {body: '', author: ''}
@@ -15,6 +23,9 @@ class CommentForm extends React.Component {
 		event.preventDefault();
 		this.context.actions.addComment(_.merge(this.state, { parent_id: this.props.parent_id} ));
 		this.setState(this.defaultState);
+		if (this.props.onCommentSubmitted) {
+			this.props.onCommentSubmitted();
+		}
 
 	}
 
