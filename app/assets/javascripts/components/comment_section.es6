@@ -6,14 +6,14 @@ import CommentForm from '/components/comment_form'
 class CommentSection extends React.Component {
 	constructor(props) {
 		super();
-		this.store = new CommentStore()
-		this.actions = Actions
+		this.store = new CommentStore();
+		this.actions = new Actions(props.restaurantId);
 		this.actions.setComments(JSON.parse(props.comments));
 	}
 	static get childContextTypes() {
 		return {
 			store: React.PropTypes.object.isRequired,
-			actions: React.PropTypes.func.isRequired
+			actions: React.PropTypes.object.isRequired
 		}
 	}
 	getChildContext() {

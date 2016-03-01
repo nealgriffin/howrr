@@ -4,4 +4,4 @@
 
 <h2>Comments</h2>
 
-<%= react_component('CommentSection', comments: raw(render(template: 'comments/index.json.jbuilder' ))) %>
+<%= react_component('CommentSection', restaurantId: @restaurant.id, comments: raw(render(template: 'comments/index.json.jbuilder' ))) %>

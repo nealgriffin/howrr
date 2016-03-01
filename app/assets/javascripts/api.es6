@@ -1,7 +1,4 @@
 class Api {
-	constructor() {
-		this.request = new XMLHttpRequest();
-	}
 
 	static token() {
 		let el = document.querySelector('meta[name="csrf-token"]');
@@ -17,21 +14,16 @@ class Api {
 		}
 	}
 
-	static post(route, params) {
-		let request = new XMLHttpRequest();
-		request.open('post', route, true);
-		request.withCredentials = true;
-		request.setRequestHeader('Accept', 'application/json');
-		request.setRequestHeader('Content-Type', 'application/json');
-		request.setRequestHeader('X-CSRF-Token', this.token() );
-		request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-		request.send(JSON.stringify(params));
-	}
-	
 	static post_w_promise(route, params) {
+		return this.xhr(route, params, 'POST');
+	}
+	static put_w_promise(route, params) {
+		return this.xhr(route, params, 'PUT');
+	}
+	static xhr(route, params, verb) {
 		return new Promise( function(resolve, reject) {
 			var req = new XMLHttpRequest();
-			req.open('POST', route);
+			req.open(verb, route);
 			req.withCredentials = true;
 			req.setRequestHeader('Accept', 'application/json');
 			req.setRequestHeader('Content-Type', 'application/json');
@@ -50,32 +42,10 @@ class Api {
 			req.send(JSON.stringify(params));
 
 
-		}.bind(this) );
-	}
+		}.bind(this) ).then(function(response) {
+			return JSON.parse(response);
+		});
 
-	static put_w_promise(route, params) {
-		return new Promise( function(resolve, reject) {
-			var req = new XMLHttpRequest();
-			req.open('PUT', route);
-			req.withCredentials = true;
-			req.setRequestHeader('Accept', 'application/json');
-			req.setRequestHeader('Content-Type', 'application/json');
-			req.setRequestHeader('X-CSRF-Token', this.token() );
-			req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-			req.onload = function() {
-				if (req.status == 200) {
-					resolve(req.response);
-				} else {
-					reject(Error(req.statusText));
-				}
-			};
-			req.onerror = function() {
-				reject(Error("Network Error"));
-			};
-			req.send();
-
-
-		}.bind(this) );
 	}
 
 }

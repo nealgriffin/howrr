@@ -63,4 +63,4 @@ class CommentStore extends EventEmitter {
 		this.emit(Constants.CHANGE_EVENT);
 	}
 }
-export default CommentStore
+export default CommentStore;
