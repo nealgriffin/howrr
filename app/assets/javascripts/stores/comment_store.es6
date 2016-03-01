@@ -41,7 +41,10 @@ class CommentStore extends EventEmitter {
 	}
 
 	comments(parentId) {
-		return this._comments.filter( c => { return c && c.parent_id == parentId} );
+		return _.chain(this._comments.filter( c => { return c && c.parent_id == parentId} ))
+						.sortBy('rank')
+						.reverse()
+						.value()
 	}
 	upvote(comment) {
 		this._comments[comment.id].rank++;
