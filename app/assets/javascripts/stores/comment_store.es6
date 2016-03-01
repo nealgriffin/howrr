@@ -48,10 +48,9 @@ class CommentStore extends EventEmitter {
 	}
 
   commentsAsTree() {
-    var c = this.comments().map((comment) => {
+    return this.comments().map((comment) => {
       return this.attachChildComments(comment)
     })
-    return c;
   }
 
   attachChildComments(comment) {
