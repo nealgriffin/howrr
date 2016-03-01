@@ -46,6 +46,22 @@ class CommentStore extends EventEmitter {
 						.reverse()
 						.value()
 	}
+
+  commentsAsTree() {
+    var c = this.comments().map((comment) => {
+      return this.attachChildComments(comment)
+    })
+    return c;
+  }
+
+  attachChildComments(comment) {
+    comment.children = (comment.id === null) ? [] : this.comments(comment.id);
+    comment.children.map((childComment) => {
+      return this.attachChildComments(childComment)
+    })
+    return comment;
+  }
+
 	upvote(comment) {
 		this._comments[comment.id].rank++;
 	}
