@@ -6,7 +6,10 @@ class Actions {
 
 	constructor(restaurantId) {
 		this.restaurantId = restaurantId;
+		//this.watchInterval = setInterval(this.watch.bind(this), 1000)
 	}
+
+
 	setComments(params) {
 
 		AppDispatcher.dispatch({
@@ -39,6 +42,11 @@ class Actions {
 		}).catch( function(error) { 
 			console.error("Error!", error)
 		})
+	}
+	watch() {
+		Api.get(`/restaurants/${this.restaurantId}/comments`).then( function(response) {
+			this.setComments(response);
+		}.bind(this))
 	}
 }
 export default Actions

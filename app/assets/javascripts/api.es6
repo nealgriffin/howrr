@@ -14,6 +14,10 @@ class Api {
 		}
 	}
 
+	static get(route) {
+		return this.xhr(route, {}, 'GET');
+	}
+
 	static post_w_promise(route, params) {
 		return this.xhr(route, params, 'POST');
 	}
