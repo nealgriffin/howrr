@@ -43,7 +43,7 @@ class Comment extends React.Component {
 					parent_id={this.props.id}
 					isReplying={this.state.isReplying}
 					onCommentSubmitted={this.onCommentSubmitted.bind(this)} />
-				<CommentList parent_id={this.props.id} />
+				<CommentList comments={this.props.children} parent_id={this.props.id} />
 			</li>
 		);
 	}
